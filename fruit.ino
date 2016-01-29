@@ -297,7 +297,7 @@ else if (reel1 == 9 && reel2 == 9 && reel3 == 9) {
   win(5);
   } 
   else {
-    return 0;
+    loop();
   }
 }
 
