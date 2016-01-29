@@ -12,7 +12,7 @@ int reel1; // fruits 1-10 , desitined position of reels
 int reel2;
 int reel3;
 
-bool held_1 = false;
+bool held_1 = false; // reels are "unheld" by default
 bool held_2 = false;
 bool held_3 = false;
 
