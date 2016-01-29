@@ -75,6 +75,9 @@ int fruit[] = { //60 possibile outcomes
   9,
 };
 
+
+
+int randn = analogRead(16);
 int sensor_1 = analogRead(15);
 int sensor_2 = analogRead(14);
 int sensor_3 = analogRead(13);
@@ -199,13 +202,13 @@ void spin() {
     digitalWrite(12,HIGH);
   }
 
-  randomSeed(10);   //randomiser for the outcome of each reel
+  randomSeed(randn);   //randomiser for the outcome of each reel
   int reel1 = fruit[random(60)];
-  randomSeed(10);
+  randomSeed(randn);
   int reel2 = fruit[random(60)];
-  randomSeed(10);
+  randomSeed(randn);
   int reel3 = fruit[random(60)];
-  randomSeed(10);
+  randomSeed(randn);
   delay(random(200,1500));
   
   if (held_1 == false) {
@@ -223,7 +226,7 @@ void spin() {
     return;
   }
 
-  randomSeed(10);
+  randomSeed(randn);
   delay(random(200,1500));
 
       if (reel_2 =! reel2 ) {
@@ -239,7 +242,7 @@ void spin() {
   }
     
  
-  randomSeed(10);
+  randomSeed(randn);
   delay(random(200,1500));
 
    if (reel_3 =! reel3 ) {
