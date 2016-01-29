@@ -17,11 +17,14 @@ bool held_2 = false;
 bool held_3 = false;
 
 
-int fruitList[99] = {};
+int fruitList[99] = {}; // stores 100 of the possible outcomes of a single reel
 int x = 0; 
 int m;
 int id = 0;
 
+
+
+int randn = analogRead(16);
 int sensor_1 = analogRead(15);
 int sensor_2 = analogRead(14);
 int sensor_3 = analogRead(13);
@@ -162,6 +165,7 @@ void spin() {
     digitalWrite(12,HIGH);
   }
 
+
   randomSeed(10);   //randomiser for the outcome of each reel
   int reel1 = fruitList[random(99)];
   randomSeed(10);
@@ -169,6 +173,7 @@ void spin() {
   randomSeed(10);
   int reel3 = fruitList[random(99)];
   randomSeed(10);
+
   delay(random(200,1500));
   
   if (held_1 == false) {
@@ -186,7 +191,7 @@ void spin() {
     
   };
 
-  randomSeed(10);
+  randomSeed(randn);
   delay(random(200,1500));
 
       if (reel_2 =! reel2 ) {
@@ -202,7 +207,7 @@ void spin() {
   };
     
  
-  randomSeed(10);
+  randomSeed(randn);
   delay(random(200,1500));
 
    if (reel_3 =! reel3 ) {
@@ -228,7 +233,8 @@ if (reel2 == i && reel2 == i && reel3 == i){
   
 }
 
-}
+};
     loop();
+
 
 
