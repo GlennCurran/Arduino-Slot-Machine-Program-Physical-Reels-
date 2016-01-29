@@ -166,13 +166,13 @@ void spin() {
   }
 
 
-  randomSeed(10);   //randomiser for the outcome of each reel
+  randomSeed(randn);   //randomiser for the outcome of each reel
   int reel1 = fruitList[random(99)];
-  randomSeed(10);
+  randomSeed(randn);
   int reel2 = fruitList[random(99)];
-  randomSeed(10);
+  randomSeed(randn);
   int reel3 = fruitList[random(99)];
-  randomSeed(10);
+  randomSeed(randn);
 
   delay(random(200,1500));
   
