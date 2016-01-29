@@ -11,7 +11,7 @@ bool held_1 = false;
 bool held_2 = false;
 bool held_3 = false;
 
-int fruit[] = { //60 possibilities
+int fruit[] = { //60 possibile outcomes
   0,
   0,
   0,
@@ -102,7 +102,7 @@ void loop() {
 
   display();
   
-  if (digitalRead(2)== HIGH) {
+  if (digitalRead(2)== HIGH) { //"hold" the selected reel
     toggle("heeld_1", true); 
   } else{
     toggle("heeld_1", false); 
@@ -127,7 +127,7 @@ void toggle(String reel, boolean flag) {
   int led;
 
   
-  if (reel == "heeld_1") {
+  if (reel == "heeld_1") {   //toggle the power of the LED inside the button that is pressed
     led = 14; 
   } else if (reel == "heeld_2") {
     led = 15; 
@@ -139,7 +139,7 @@ void toggle(String reel, boolean flag) {
     flag = true;
     digitalWrite(led,HIGH);
   } else {
-    flag = false;
+    flag = false;  
     digitalWrite(led,LOW);
   }
 
@@ -171,7 +171,7 @@ void display() {
 }
 
 
-void step(int reel){
+void step(int reel){ //increments reel value, 10 max
 
   reel = reel +1;
   
@@ -199,64 +199,62 @@ void spin() {
     digitalWrite(12,HIGH);
   }
 
+  randomSeed(10);   //randomiser for the outcome of each reel
+  int reel1 = fruit[random(60)];
   randomSeed(10);
-  int reel1 = fruit[random(20)];
+  int reel2 = fruit[random(60)];
   randomSeed(10);
-  int reel2 = fruit[random(20)];
-  randomSeed(10);
-  int reel3 = fruit[random(20)];
+  int reel3 = fruit[random(60)];
   randomSeed(10);
   delay(random(200,1500));
   
   if (held_1 == false) {
     
 
-    if (reel_1 =! reel1 ) {
+    if (reel_1 =! reel1 ) { //each reel lands on the fruit that the randomiser has given
       if (sensor_1 < 300) {
            step(reel_1);
       } else {
-      digitalWrite(10,LOW);
         return;      
       }
+    } else {
+      digitalWrite(10,LOW);
     }
+    return;
   }
 
   randomSeed(10);
   delay(random(200,1500));
-    
-    
-   if (held_2 == false) {
-    
-    if (reel_2 =! reel2) {
-      if (sensor_2 < 300){
-        step(reel_2);
+
+      if (reel_2 =! reel2 ) {
+      if (sensor_1 < 300) {
+           step(reel_2);
+      } else {
+        return;      
       }
-      else {
-        digitalWrite(11,LOW);
-      
-        return;
-      
-      }
+    } else {
+      digitalWrite(10,LOW);
     }
+    return;
   }
+    
  
   randomSeed(10);
   delay(random(200,1500));
 
-  if (held_3 == false) { 
-    if (reel_3 =! reel3) {
+   if (reel_3 =! reel3 ) {
       if (sensor_3 < 300) {
-        step(reel_3);
+           step(reel_3);
+      } else {
+        return;      
       }
-    else {
-      digitalWrite(12,LOW);
-      return;  
+    } else {
+      digitalWrite(10,LOW);
     }
-   }
+    return;
   }
 
-
-if (reel1 == 0 && reel2 == 0 && reel3 == 0) {
+if (reel1 == 0 && reel2 == 0 && reel3 == 0) { //reward user if win-condition is met
   win(1);
 }
 
