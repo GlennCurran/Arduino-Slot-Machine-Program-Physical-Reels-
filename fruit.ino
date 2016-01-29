@@ -1,79 +1,26 @@
 #include <LiquidCrystal.h> 
+#include "config.h"
 float credit = 0;
 float pot = 0;
 
 
-int reel_1; // fruits 1-10
+int reel_1; // fruits 1-10 , current position of reels
 int reel_2;
 int reel_3; 
+
+int reel1; // fruits 1-10 , desitined position of reels 
+int reel2;
+int reel3;
 
 bool held_1 = false;
 bool held_2 = false;
 bool held_3 = false;
 
-int fruit[] = { //60 possibile outcomes
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  1,
-  2,
-  2,
-  2,
-  2,
-  2,
-  2,
-  2,
-  3,
-  3,
-  3,
-  3,
-  3,
-  3,
-  4,
-  4,
-  4,
-  4,
-  4,
-  4,
-  4,
-  5,
-  5,
-  5,
-  5,
-  5,
-  5,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  7,
-  7,
-  7,
-  7,
-  8,
-  8,
-  8,
-  8,
-  9,
-};
+
+int fruitList[99] = {};
+int x = 0; 
+int m;
+int id = 0;
 
 int sensor_1 = analogRead(15);
 int sensor_2 = analogRead(14);
@@ -98,7 +45,20 @@ void setup() {
 
 }
 
+while (id != NumberOfFruits) {     //build fruitlist array from stats sctructure found in config header
+   for (m = 0; fruit[id].freq > m; m++) {
+       fruitList[x] = id;
+       x++;
+    }
+
+id++;
+
+};
+
 void loop() {
+
+
+
 
   display();
   
@@ -147,8 +107,11 @@ void toggle(String reel, boolean flag) {
 
 
 void win(int amount){
-
-  lcd.print("You've won £");
+  
+  lcd.print("Three ");
+  lcd.print(fruit[reel_1].title); //get name of the fruit that has appeared on all three reels and print it
+  lcd.print("'s!!!"}
+  lcd.print(" You've won £");
   lcd.print(amount);
   lcd.print(" !");
   
@@ -171,15 +134,15 @@ void display() {
 }
 
 
-void step(int reel){ //increments reel value, 10 max
+void step(int PluggedReel){ //increments reel value, 10 max
 
-  reel = reel +1;
+  PluggedReel = PluggedReel +1; //probably need to do something to do with pointers here
   
-  if (reel > 9) {
-    reel = 0;
+  if (PluggedReel > 9) {
+    PluggedReel = 0;
   }
-  return;
-}
+  
+};
 
 
 
@@ -200,11 +163,11 @@ void spin() {
   }
 
   randomSeed(10);   //randomiser for the outcome of each reel
-  int reel1 = fruit[random(60)];
+  int reel1 = fruitList[random(99)];
   randomSeed(10);
-  int reel2 = fruit[random(60)];
+  int reel2 = fruitList[random(99)];
   randomSeed(10);
-  int reel3 = fruit[random(60)];
+  int reel3 = fruitList[random(99)];
   randomSeed(10);
   delay(random(200,1500));
   
@@ -220,8 +183,8 @@ void spin() {
     } else {
       digitalWrite(10,LOW);
     }
-    return;
-  }
+    
+  };
 
   randomSeed(10);
   delay(random(200,1500));
@@ -235,8 +198,8 @@ void spin() {
     } else {
       digitalWrite(11,LOW);
     }
-    return;
-  }
+    
+  };
     
  
   randomSeed(10);
@@ -251,53 +214,21 @@ void spin() {
     } else {
       digitalWrite(12,LOW);
     }
-    return;
-  }
+    
+  };
 
-if (reel1 == 0 && reel2 == 0 && reel3 == 0) { //reward user if win-condition is met
-  win(1);
+
+int i;
+
+while (i = 0; NumberOfFruits > i; ; i++) {
+
+if (reel2 == i && reel2 == i && reel3 == i){
+
+   win(fruit[i].prize);
+  
 }
 
-else if (reel1 == 1 && reel2 == 1 && reel3 == 3) {
-  win(1.4);
 }
+    loop();
 
-
-else if (reel1 == 2 && reel2 == 2 && reel3 == 2) {
-  win(1.6);
-}
-
-else if (reel1 == 3 && reel2 == 3 && reel3 == 3) {
-  win(2);
-}
-
-else if (reel1 == 4 && reel2 == 4 && reel3 == 4) {
-  win(2.4);
-}
-
-else if (reel1 == 5 && reel2 == 5 && reel3 == 5) {
-  win(3);
-}
-
-else if (reel1 == 6 && reel2 == 6 && reel3 == 6) {
-  win(3.2);
-}
-
-else if (reel1 == 7 && reel2 == 7 && reel3 == 7) {
-  win(3.6);
-}
-
-
-else if (reel1 == 8 && reel2 == 8 && reel3 == 8) {
-  win(4);
-}
-
-
-else if (reel1 == 9 && reel2 == 9 && reel3 == 9) {
-  win(5);
-  } 
-  else {
-    return 0;
-  }
-}
 
