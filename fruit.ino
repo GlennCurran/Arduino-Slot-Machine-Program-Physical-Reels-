@@ -66,10 +66,10 @@ void loop() {
   display();
 
 
-  if (hold_flag = true) {
+  if (hold_flag == true) {
     
      
-     while (a = true;) { // there's probably a better way to write while loops
+     while (a == true;) { // there's probably a better way to write while loops
 
   if (digitalRead(2)== HIGH) { //"hold" the selected reel
     toggle("heeld_1", true); 
@@ -118,11 +118,11 @@ void toggle(String reel, boolean flag) {
     led = 16; 
   } 
     
-  if (flag = false) {
+  if (flag == false) {
     flag = true;
     digitalWrite(led,HIGH);
   } else {
-    flag = false;  
+    flag == false;  
     digitalWrite(led,LOW);
   }
 
@@ -159,7 +159,7 @@ void display() {
 
 void step(int PluggedReel){ //increments reel value, 10 max
 
-  PluggedReel = PluggedReel +1; //probably need to do something to do with pointers here
+  PluggedReel++; //probably need to do something to do with pointers here
   
   if (PluggedReel > 9) {
     PluggedReel = 0;
