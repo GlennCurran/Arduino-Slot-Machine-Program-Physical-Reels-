@@ -1,6 +1,6 @@
 #include <LiquidCrystal.h> 
 #include "config.h"
-float credit = 0;
+float credit = 5;
 float pot = 0;
 
 
@@ -16,12 +16,14 @@ bool held_1 = false; // reels are "unheld" by default
 bool held_2 = false;
 bool held_3 = false;
 
+bool hold_flag = false; //does the player have an opportunity to hold the reels?
+bool a = true; // while looping
 
 int fruitList[99] = {}; // stores 100 of the possible outcomes of a single reel
 int x = 0; 
 int m;
 int id = 0;
-
+ 
 
 
 int randn = analogRead(16);
@@ -61,10 +63,14 @@ id++;
 void loop() {
 
 
-
-
   display();
-  
+
+
+  if (hold_flag = true) {
+    
+     
+     while (a = true;) { // there's probably a better way to write while loops
+
   if (digitalRead(2)== HIGH) { //"hold" the selected reel
     toggle("heeld_1", true); 
   } else{
@@ -82,8 +88,22 @@ void loop() {
   }else{
     toggle("heeld_3", false); 
   }
+  
+ if (digitalRead(5)== HIGH) {
+  spin();
+  }
+      
+     };
+    
+  } else {
 
-}
+    if (digitalRead(5)== HIGH) {
+  spin();
+    
+  };
+
+};
+
 
 
 void toggle(String reel, boolean flag) {
@@ -113,7 +133,7 @@ void win(int amount){
   
   lcd.print("Three ");
   lcd.print(fruit[reel_1].title); //get name of the fruit that has appeared on all three reels and print it
-  lcd.print("'s!!!"}
+  lcd.print("'s!!!");
   lcd.print(" You've won £");
   lcd.print(amount);
   lcd.print(" !");
@@ -179,50 +199,43 @@ void spin() {
   if (held_1 == false) {
     
 
-    if (reel_1 =! reel1 ) { //each reel lands on the fruit that the randomiser has given
-      if (sensor_1 < 300) {
-           step(reel_1);
+    while (reel_1 =! reel1 ) { //each reel lands on the fruit that the randomiser has given
+      while (sensor_1 > 300) {
+           //do nothing
       } else {
-        return;      
-      }
-    } else {
-      digitalWrite(10,LOW);
+       step(reel_1);
     }
     
-  };
+  }
 
+  };
+ digitalWrite(10,LOW);
   randomSeed(randn);
   delay(random(200,1500));
 
-      if (reel_2 =! reel2 ) {
-      if (sensor_1 < 300) {
-           step(reel_2);
+         while (reel_2 =! reel2 ) { //each reel lands on the fruit that the randomiser has given
+      while (sensor_2 > 300) {
+           //do nothing
       } else {
-        return;      
-      }
-    } else {
-      digitalWrite(11,LOW);
+       step(reel_2);
     }
     
   };
-    
- 
+  
+ digitalWrite(11,LOW);
   randomSeed(randn);
   delay(random(200,1500));
 
-   if (reel_3 =! reel3 ) {
-      if (sensor_3 < 300) {
-           step(reel_3);
+     while (reel_3 =! reel3 ) { //each reel lands on the fruit that the randomiser has given
+      while (sensor_3 > 300) {
+           //do nothing
       } else {
-        return;      
-      }
-    } else {
-      digitalWrite(12,LOW);
+       step(reel_3);
     }
     
   };
 
-
+digitalWrite(12,LOW);
 int i;
 
 while (i = 0; NumberOfFruits > i; ; i++) {
@@ -231,10 +244,22 @@ if (reel2 == i && reel2 == i && reel3 == i){
 
    win(fruit[i].prize);
   
-}
+                 }
+
+            }
+   
+       }
+       
+if (reel_flag == false) { //toggle reel flag
+
+  reel_flag = true; 
+  
+} else  {
+  reel_flag = false;
+       }
+
+  };
+
 
 };
-    loop();
-
-
 
