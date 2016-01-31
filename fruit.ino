@@ -22,6 +22,7 @@ bool a = true; // while looping
 int fruitList[99] = {}; // stores 100 of the possible outcomes of a single reel
 int x = 0; 
 int m;
+int k;
 int id = 0;
  
 
@@ -49,6 +50,10 @@ void setup() {
   pinMode(12, OUTPUT); // motor C
 
 }
+
+for (k = 0; fruits[k].title != NULL; k++) { //counts the number of fruits specified in the config header
+  NumberOfFruits++;
+};
 
 while (id != NumberOfFruits) {     //build fruitlist array from stats sctructure found in config header
    for (m = 0; fruit[id].freq > m; m++) {

@@ -11,7 +11,7 @@ int freq; //frequency out of 100
 
 //config fruits below
 
-int NumberOfFruits = 10;
+int NumberOfFruits = 0; //important; leave value set to 0
 
 stats.fruit[] { // fruits can be added/removed here, along with their cash reward and odds
 
@@ -27,7 +27,6 @@ stats.fruit[] { // fruits can be added/removed here, along with their cash rewar
 {"jackpot" , 5, 1};
 
 };
-
 
 
 
