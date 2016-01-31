@@ -41,17 +41,17 @@ void setup() {
   pinMode(3, INPUT); // reel 2
   pinMode(4, INPUT); // reel 3
   pinMode(5, INPUT); // start reel 
-  pinMode(6, INPUT);  // LED 1
-  pinMode(7, INPUT); // LED 2
-  pinMode(8, INPUT); // LED3
-  pinMode(9, INPUT); // LED start reel
+  pinMode(6, OUTPUT);  // LED 1
+  pinMode(7, OUTPUT); // LED 2
+  pinMode(8, OUTPUT); // LED3
+  pinMode(9, OUTPUT); // LED start reel
   pinMode(10, OUTPUT); // motor A
   pinMode(11, OUTPUT); // motor B 
   pinMode(12, OUTPUT); // motor C
 
 }
 
-for (k = 0; fruits[k].title != NULL; k++) { //counts the number of fruits specified in the config header
+for (k = 0; fruit[k].title != NULL; k++) { //counts the number of fruits specified in the config header
   NumberOfFruits++;
 };
 
@@ -72,8 +72,10 @@ void loop() {
 
 
   if (hold_flag == true) {
-    
-     
+
+    digitalWrite(6, HIGH);
+    digitalWrite(7, HIGH);
+    digitalWrite(8, HIGH);
      while (a == true;) { // there's probably a better way to write while loops
 
   if (digitalRead(2)== HIGH) { //"hold" the selected reel
@@ -116,19 +118,19 @@ void toggle(String reel, boolean flag) {
 
   
   if (reel == "heeld_1") {   //toggle the power of the LED inside the button that is pressed
-    led = 14; 
+    led = 6; 
   } else if (reel == "heeld_2") {
-    led = 15; 
+    led = 7; 
   } else if (reel == "heeld_3") {
-    led = 16; 
+    led = 8; 
   } 
     
   if (flag == false) {
     flag = true;
-    digitalWrite(led,HIGH);
+    digitalWrite(led,LOW);
   } else {
     flag == false;  
-    digitalWrite(led,LOW);
+    digitalWrite(led,HIGH);
   }
 
 }
@@ -209,6 +211,8 @@ void spin() {
            //do nothing
       } else {
        step(reel_1);
+       step(reel_2);
+       step(reel_3);
     }
     
   }
@@ -218,11 +222,12 @@ void spin() {
   randomSeed(randn);
   delay(random(200,1500));
 
-         while (reel_2 =! reel2 ) { //each reel lands on the fruit that the randomiser has given
+         while (reel_2 =! reel2 ) {
       while (sensor_2 > 300) {
            //do nothing
       } else {
        step(reel_2);
+       step(reel_3);
     }
     
   };
@@ -231,7 +236,7 @@ void spin() {
   randomSeed(randn);
   delay(random(200,1500));
 
-     while (reel_3 =! reel3 ) { //each reel lands on the fruit that the randomiser has given
+     while (reel_3 =! reel3 ) { 
       while (sensor_3 > 300) {
            //do nothing
       } else {
@@ -253,7 +258,7 @@ if (reel2 == i && reel2 == i && reel3 == i){
 
             }
    
-       }
+       };
        
 if (reel_flag == false) { //toggle reel flag
 

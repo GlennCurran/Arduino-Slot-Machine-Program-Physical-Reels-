@@ -21,7 +21,7 @@ stats.fruit[] { // fruits can be added/removed here, along with their cash rewar
 {"red seven", 2,10},
 {"blue seven", 2.2, 8},
 {"black seven", 2.4, 7},
-{"single _bar" , 3, 6};
+{"single bar" , 3, 6};
 {"double bar" , 3.2, 4};
 {"triple bar", 3.4, 2};
 {"jackpot" , 5, 1};
